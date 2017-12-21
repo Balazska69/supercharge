@@ -8,7 +8,8 @@
 
 #pragma mark - URLs
 
-#define kmainURL @"https://go.telenor.hu/mytelenorapp/va9_test/THU"
+#define kmainBKKURL @"http://bkk-api.supercharge.io"
+#define kmainStopURL @"http://futar.bkk.hu/bkk-utvonaltervezo-api/ws/otp/api/wher"
 
 #pragma mark - API keys
 

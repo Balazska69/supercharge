@@ -27,14 +27,11 @@
     return self;
 }
 
-- (void)sendRequestWithParameters:(NSDictionary *)params headers:(NSDictionary *)headers toURLTail:(NSString *)urlTail methodType:(NSString *)methodType needErrorPopup:(BOOL)needErrorPopup completion: (AsyncNetworkSuccessCallback)completion {
+- (void)sendRequestWithParameters:(NSDictionary *)params headers:(NSDictionary *)headers toURLTail:(NSString *)urlTail methodType:(NSString *)methodType mainUrl:(NSString *)mainURL completion: (AsyncNetworkSuccessCallback)completion {
 
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kmainURL, urlTail]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", mainURL, urlTail]];
     NSData *postData = [self encodeDictionary:params];
     
-    if ([urlTail isEqualToString:@"/app_end_points/reportNetworkError?isAppRequest=1"]) {
-        postData = [NSJSONSerialization dataWithJSONObject:[params objectForKey:@"networkErrors"] options:NSJSONWritingPrettyPrinted error:nil];
-    }
     
     NSString *bodyJsonString = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
     NSLog(@"==========> SEND BODY TO SERVER:\n%@",bodyJsonString);
@@ -57,7 +54,7 @@
         [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         [request setHTTPBody:postData];
     } else {
-        NSMutableString *getUrlString = [NSMutableString stringWithFormat:@"%@%@", kmainURL, urlTail];
+        NSMutableString *getUrlString = [NSMutableString stringWithFormat:@"%@%@", mainURL, urlTail];
         
         int i = 0;
         for (NSString *key in params.allKeys) {
@@ -90,11 +87,6 @@
             NSString *returnResultString = nil;
             if (receivedData) {
                 returnDictionary = [NSJSONSerialization JSONObjectWithData:(NSData *)receivedData options:NSJSONReadingMutableContainers error:nil];
-                if ([[[[returnDictionary objectForKey:@"page"] objectForKey:@"app"] objectForKey:@"app"] isKindOfClass:[NSDictionary class]]) {
-                    if ([[[[returnDictionary objectForKey:@"page"] objectForKey:@"app"] objectForKey:@"app"] objectForKey:@"return"]) {
-                        returnResultString = [[[[returnDictionary objectForKey:@"page"] objectForKey:@"app"] objectForKey:@"app"] objectForKey:@"result"];
-                    }
-                }
             }
             
             if (error) {
@@ -134,8 +126,12 @@
     return nil;
 }
 
-- (void)getXmasDailyStatusesWithCompletion:(AsyncNetworkSuccessCallback)completion {
-    [self sendRequestWithParameters:@{@"isAppRequest" : @"1", @"appsid" : @"425e9de9254a5660887265993d61e755", @"timestamp" : [NSString stringWithFormat:@"%.f", [[NSDate date] timeIntervalSince1970]]} headers:nil toURLTail:@"/app_end_points/getXmasDailyStatuses" methodType:@"GET" needErrorPopup:NO completion:completion];
+- (void)getStationsWithCompletion:(AsyncNetworkSuccessCallback)completion {
+    [self sendRequestWithParameters:nil headers:nil toURLTail:@"/stops" methodType:@"GET" mainUrl:kmainBKKURL completion:completion];
+}
+
+- (void)getStopDetailsWithStopID:(NSString *)stopID completion:(AsyncNetworkSuccessCallback)completion {
+    [self sendRequestWithParameters:nil headers:nil toURLTail:[NSString stringWithFormat:@"/arrivals-and-departures-for-stop.json?stopId=BKK_%@", stopID] methodType:@"GET" mainUrl:kmainStopURL completion:completion];
 }
 
 @end

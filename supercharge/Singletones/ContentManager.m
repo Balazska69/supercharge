@@ -7,8 +7,11 @@
 //
 
 #import "ContentManager.h"
+#import "SCRoute.h"
 
 @implementation ContentManager
+@synthesize nearStationsArray;
+@synthesize myLocation;
 
 + (ContentManager *)getInstance {
     static dispatch_once_t pred;
@@ -22,30 +25,53 @@
 - (id)init {
     self = [super init];
     if (self != nil) {
+        myLocation = [[CLLocation alloc] initWithLatitude:47.497509 longitude:19.054193];
         
     }
     return self;
 }
 
-- (void)getXmasDailyStatusesWithCompletion:(AsyncNetworkSuccessCallback)completion {
-    [kNetworkManager getXmasDailyStatusesWithCompletion:^(NSError *error, NSObject *data) {
+- (void)getStationsWithCompletion:(AsyncNetworkSuccessCallback)completion {
+    [kNetworkManager getStationsWithCompletion:^(NSError *error, NSObject *data) {
         if (!error && data) {
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:(NSData *)data options:NSJSONReadingMutableContainers error:nil];
-            NSDictionary *xmasCalendarResponseDictionary = [[[responseDictionary objectForKey:@"page"] objectForKey:@"app"] objectForKey:@"app"];
-            NSMutableArray *tempAdventDaysArray = [NSMutableArray new];
-            if ([xmasCalendarResponseDictionary objectForKey:@"result"] && [[xmasCalendarResponseDictionary objectForKey:@"result"] isEqualToString:@"Success"]) {
-//                for (NSDictionary *adventDayDictionary in [xmasCalendarResponseDictionary objectForKey:@"day"]) {
-//                    MTAdventDay *adventDay = [[MTAdventDay alloc] initWithJSONDictionary:adventDayDictionary];
-//                    [tempAdventDaysArray addObject:adventDay];
-//                }
+            NSMutableArray *tempStationsArray = [NSMutableArray new];
+            for (NSDictionary *stationDictionary in responseDictionary) {
+                SCStation *station = [[SCStation alloc] initWithDataDictionary:stationDictionary];
+                if ([station isNearStationFromLation:myLocation]) {
+                    [tempStationsArray addObject:station];
+                }
             }
-//            self.xmasCalendarDays = [NSArray arrayWithArray:tempAdventDaysArray];
-            return completion(nil, responseDictionary);
+            self.nearStationsArray = [NSArray arrayWithArray:tempStationsArray];
+            return completion(nil, nearStationsArray);
         } else {
             return completion(error, nil);
         }
     }];
 }
 
+- (void)getStopDetailsWithStation:(SCStation *)station completion:(AsyncNetworkSuccessCallback)completion {
+    [kNetworkManager getStopDetailsWithStopID:station.stopId completion:^(NSError *error, NSObject *data) {
+        if (!error && data) {
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:(NSData *)data options:NSJSONReadingMutableContainers error:nil];
+            if ([[responseDictionary objectForKey:@"data"] isKindOfClass:[NSDictionary class]]) {
+                if ([[[responseDictionary objectForKey:@"data"] objectForKey:@"references"] objectForKey:@"routes"] && [[[[responseDictionary objectForKey:@"data"] objectForKey:@"references"] objectForKey:@"routes"] isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary *routesDictionary = [[[responseDictionary objectForKey:@"data"] objectForKey:@"references"] objectForKey:@"routes"];
+                    
+                    NSMutableArray *tempRoutesArray = [NSMutableArray new];
+                    for (NSString *routeDictionaryKey in [routesDictionary allKeys]) {
+                        SCRoute *route = [[SCRoute alloc] initWithDataDictionary:[routesDictionary objectForKey:routeDictionaryKey]];
+                        [tempRoutesArray addObject:route];
+                    }
+                    station.routesArray = [NSArray arrayWithArray:tempRoutesArray];
+                    NSLog(@"he");
+                }
+            }
+            return completion(nil, responseDictionary);
+        } else {
+            return completion(error, nil);
+        }
+    }];
+}
 
 @end

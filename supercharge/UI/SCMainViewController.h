@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SCStationsTableDelegate.h"
 
-@interface SCMainViewController : UIViewController
+@interface SCMainViewController : UIViewController {
+    UITableView *tableView;
+    SCStationsTableDelegate *tableDelegate;
+    UIActivityIndicatorView *activityIndicator;
+    UIAlertController *alert;
+}
 
 @end

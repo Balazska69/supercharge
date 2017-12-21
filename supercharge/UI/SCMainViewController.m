@@ -7,6 +7,7 @@
 //
 
 #import "SCMainViewController.h"
+#import "SCStation.h"
 
 @interface SCMainViewController ()
 
@@ -17,12 +18,66 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    [kContentManager getXmasDailyStatusesWithCompletion:^(NSError *error, NSObject *data) {
-        
+    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 20.0f, kScreenWidth, kScreenHeight - 20.0f)];
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    tableView.backgroundColor = [UIColor clearColor];
+    tableDelegate = [[SCStationsTableDelegate alloc] init];
+    tableView.delegate = tableDelegate;
+    tableView.dataSource = tableDelegate;
+    [self.view addSubview:tableView];
+    
+    [self getStationsData];
+}
+
+- (void)getStationsData {
+    
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityIndicator.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame));
+    activityIndicator.hidesWhenStopped = YES;
+    [self.view addSubview:activityIndicator];
+    [activityIndicator startAnimating];
+    
+    [kContentManager getStationsWithCompletion:^(NSError *error, NSObject *data) {
+        if (data && !error) {
+            __block NSInteger fetchedDetailsCount = 0;
+            for (SCStation *station in kContentManager.nearStationsArray) {
+                [kContentManager getStopDetailsWithStation:station completion:^(NSError *error, NSObject *data) {
+                    if (data && !error) {
+                        fetchedDetailsCount ++;
+                        if (fetchedDetailsCount == kContentManager.nearStationsArray.count) {
+                            [activityIndicator stopAnimating];
+                            [tableView reloadData];
+                        }
+                    } else {
+                        [activityIndicator stopAnimating];
+                        [self showErrorPopUp];
+                    }
+                }];
+            }
+        } else {
+            [activityIndicator stopAnimating];
+            [self showErrorPopUp];
+        }
     }];
-    // Do any additional setup after loading the view.
+}
+
+- (void)showErrorPopUp {
+    if (!alert) {
+        alert = [UIAlertController alertControllerWithTitle:@"Upsz" message:@"Hiba lépett fel a szerverrel való kommunikáció során. Megpróbálod újra." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Újrapróbálom" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            [self getStationsData];
+            alert = nil;
+            
+        }];
+        UIAlertAction *noButton = [UIAlertAction actionWithTitle:@"Mégsem" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                       exit(0);
+                                   }];
+        [alert addAction:okButton];
+        [alert addAction:noButton];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

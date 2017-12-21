@@ -19,6 +19,7 @@ typedef void (^AsyncNetworkSuccessCallback)(NSError *error, NSObject *data);
 
 + (NetworkManager *)getInstance;
 
-- (void)getXmasDailyStatusesWithCompletion:(AsyncNetworkSuccessCallback)completion;
+- (void)getStationsWithCompletion:(AsyncNetworkSuccessCallback)completion;
+- (void)getStopDetailsWithStopID:(NSString *)stopID completion:(AsyncNetworkSuccessCallback)completion;
 
 @end

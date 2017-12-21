@@ -17,6 +17,14 @@
 		183CDBD01FEBAE63003638BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 183CDBCF1FEBAE63003638BF /* Assets.xcassets */; };
 		183CDBD41FEBB775003638BF /* ContentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 183CDBD31FEBB775003638BF /* ContentManager.m */; };
 		183CDBD71FEBB8BF003638BF /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 183CDBD61FEBB8BF003638BF /* NetworkManager.m */; };
+		183CDBDB1FEBC36F003638BF /* SCStation.m in Sources */ = {isa = PBXBuildFile; fileRef = 183CDBDA1FEBC36F003638BF /* SCStation.m */; };
+		183CDBE11FEBD067003638BF /* SCRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 183CDBE01FEBD067003638BF /* SCRoute.m */; };
+		183CDBE61FEBD7E5003638BF /* SCStationsTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 183CDBE51FEBD7E5003638BF /* SCStationsTableDelegate.m */; };
+		183CDBE91FEBDA4A003638BF /* SCRouteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183CDBE81FEBDA4A003638BF /* SCRouteTableViewCell.m */; };
+		183CDBEF1FEBE0E7003638BF /* trolleybusIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 183CDBEB1FEBE0E7003638BF /* trolleybusIcon@3x.png */; };
+		183CDBF01FEBE0E7003638BF /* trolleybusIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 183CDBEC1FEBE0E7003638BF /* trolleybusIcon@2x.png */; };
+		183CDBF11FEBE0E7003638BF /* busIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 183CDBED1FEBE0E7003638BF /* busIcon@3x.png */; };
+		183CDBF21FEBE0E7003638BF /* busIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 183CDBEE1FEBE0E7003638BF /* busIcon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +81,18 @@
 		183CDBD31FEBB775003638BF /* ContentManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentManager.m; sourceTree = "<group>"; };
 		183CDBD51FEBB8BF003638BF /* NetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		183CDBD61FEBB8BF003638BF /* NetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
+		183CDBD91FEBC36F003638BF /* SCStation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCStation.h; sourceTree = "<group>"; };
+		183CDBDA1FEBC36F003638BF /* SCStation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCStation.m; sourceTree = "<group>"; };
+		183CDBDF1FEBD067003638BF /* SCRoute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCRoute.h; sourceTree = "<group>"; };
+		183CDBE01FEBD067003638BF /* SCRoute.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCRoute.m; sourceTree = "<group>"; };
+		183CDBE41FEBD7E5003638BF /* SCStationsTableDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCStationsTableDelegate.h; sourceTree = "<group>"; };
+		183CDBE51FEBD7E5003638BF /* SCStationsTableDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCStationsTableDelegate.m; sourceTree = "<group>"; };
+		183CDBE71FEBDA4A003638BF /* SCRouteTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCRouteTableViewCell.h; sourceTree = "<group>"; };
+		183CDBE81FEBDA4A003638BF /* SCRouteTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCRouteTableViewCell.m; sourceTree = "<group>"; };
+		183CDBEB1FEBE0E7003638BF /* trolleybusIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trolleybusIcon@3x.png"; sourceTree = "<group>"; };
+		183CDBEC1FEBE0E7003638BF /* trolleybusIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trolleybusIcon@2x.png"; sourceTree = "<group>"; };
+		183CDBED1FEBE0E7003638BF /* busIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "busIcon@3x.png"; sourceTree = "<group>"; };
+		183CDBEE1FEBE0E7003638BF /* busIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "busIcon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +148,7 @@
 				183CDBB51FEBABF2003638BF /* 3rdParty */,
 				183CDBAF1FEBAA0C003638BF /* Assets */,
 				183CDBB11FEBAA0C003638BF /* Common */,
+				183CDBD81FEBC356003638BF /* DAO */,
 				183CDBAC1FEBAA0C003638BF /* UI */,
 				183CDBD11FEBB761003638BF /* Singletones */,
 				183CDB7F1FEBA6B7003638BF /* Info.plist */,
@@ -158,6 +179,8 @@
 		183CDBAC1FEBAA0C003638BF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				183CDBE21FEBD77D003638BF /* Components */,
+				183CDBE31FEBD77D003638BF /* Delegates */,
 				183CDBAE1FEBAA0C003638BF /* SCMainViewController.h */,
 				183CDBAD1FEBAA0C003638BF /* SCMainViewController.m */,
 			);
@@ -169,6 +192,7 @@
 			children = (
 				183CDBCF1FEBAE63003638BF /* Assets.xcassets */,
 				183CDBB01FEBAA0C003638BF /* Default-568h@2x.png */,
+				183CDBEA1FEBE0E7003638BF /* Images */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -198,6 +222,46 @@
 				183CDBD61FEBB8BF003638BF /* NetworkManager.m */,
 			);
 			path = Singletones;
+			sourceTree = "<group>";
+		};
+		183CDBD81FEBC356003638BF /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				183CDBD91FEBC36F003638BF /* SCStation.h */,
+				183CDBDA1FEBC36F003638BF /* SCStation.m */,
+				183CDBDF1FEBD067003638BF /* SCRoute.h */,
+				183CDBE01FEBD067003638BF /* SCRoute.m */,
+			);
+			path = DAO;
+			sourceTree = "<group>";
+		};
+		183CDBE21FEBD77D003638BF /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				183CDBE71FEBDA4A003638BF /* SCRouteTableViewCell.h */,
+				183CDBE81FEBDA4A003638BF /* SCRouteTableViewCell.m */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		183CDBE31FEBD77D003638BF /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				183CDBE41FEBD7E5003638BF /* SCStationsTableDelegate.h */,
+				183CDBE51FEBD7E5003638BF /* SCStationsTableDelegate.m */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		183CDBEA1FEBE0E7003638BF /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				183CDBEB1FEBE0E7003638BF /* trolleybusIcon@3x.png */,
+				183CDBEC1FEBE0E7003638BF /* trolleybusIcon@2x.png */,
+				183CDBED1FEBE0E7003638BF /* busIcon@3x.png */,
+				183CDBEE1FEBE0E7003638BF /* busIcon@2x.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,7 +371,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183CDBF11FEBE0E7003638BF /* busIcon@3x.png in Resources */,
+				183CDBF01FEBE0E7003638BF /* trolleybusIcon@2x.png in Resources */,
 				183CDBD01FEBAE63003638BF /* Assets.xcassets in Resources */,
+				183CDBEF1FEBE0E7003638BF /* trolleybusIcon@3x.png in Resources */,
+				183CDBF21FEBE0E7003638BF /* busIcon@2x.png in Resources */,
 				183CDBB41FEBAA0C003638BF /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,10 +401,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183CDBE61FEBD7E5003638BF /* SCStationsTableDelegate.m in Sources */,
 				183CDB811FEBA6B7003638BF /* main.m in Sources */,
+				183CDBE11FEBD067003638BF /* SCRoute.m in Sources */,
 				183CDBD41FEBB775003638BF /* ContentManager.m in Sources */,
 				183CDB731FEBA6B7003638BF /* AppDelegate.m in Sources */,
 				183CDBD71FEBB8BF003638BF /* NetworkManager.m in Sources */,
+				183CDBE91FEBDA4A003638BF /* SCRouteTableViewCell.m in Sources */,
+				183CDBDB1FEBC36F003638BF /* SCStation.m in Sources */,
 				183CDBB31FEBAA0C003638BF /* SCMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

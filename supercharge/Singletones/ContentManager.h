@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+#import "SCStation.h"
 
 #define kContentManager [ContentManager getInstance]
 
@@ -19,6 +21,11 @@ typedef void (^AsyncNetworkSuccessCallback)(NSError *error, NSObject *data);
 
 + (ContentManager *)getInstance;
 
-- (void)getXmasDailyStatusesWithCompletion:(AsyncNetworkSuccessCallback)completion;
+- (void)getStationsWithCompletion:(AsyncNetworkSuccessCallback)completion;
+- (void)getStopDetailsWithStation:(SCStation *)station completion:(AsyncNetworkSuccessCallback)completion;
+
+@property (nonatomic, strong) NSArray *nearStationsArray;
+
+@property (nonatomic, strong) CLLocation *myLocation;
 
 @end
