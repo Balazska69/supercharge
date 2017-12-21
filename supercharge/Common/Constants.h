@@ -9,7 +9,7 @@
 #pragma mark - URLs
 
 #define kmainBKKURL @"http://bkk-api.supercharge.io"
-#define kmainStopURL @"http://futar.bkk.hu/bkk-utvonaltervezo-api/ws/otp/api/wher"
+#define kmainStopURL @"http://futar.bkk.hu/bkk-utvonaltervezo-api/ws/otp/api/where"
 
 #pragma mark - API keys
 
